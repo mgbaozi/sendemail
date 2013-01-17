@@ -51,7 +51,7 @@ if __name__ == '__main__':
 	argv.pop(0)
 	args = {'t':[],'m':'','s':'','f':[]}
 	for item in argv:
-		if '-' in item:
+		if item[0] == '-':
 			flag = item[1]
 			continue
 		if isinstance(args[flag],list):
