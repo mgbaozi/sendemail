@@ -18,10 +18,10 @@ class SendEmail(object):
 		self.mail_pass = conf.get('client','passwd')
 		name = conf.get('client','name')
 		try:
-			address = conf.get('client','address')
+			self.address = conf.get('client','address')
 		except:
-			address = mail_user + '@' + mail_host[5:]
-		self.me = name + '<' + address + '>'
+			self.address = mail_user + '@' + mail_host[5:]
+		self.me = name + '<' + self.address + '>'
 
 	def _build_msg(self,args):
 		to_list = args['t']
@@ -43,7 +43,7 @@ class SendEmail(object):
 		send_smtp = smtplib.SMTP()
 		send_smtp.connect(self.mail_host)
 		send_smtp.login(self.mail_user,self.mail_pass)
-		send_smtp.sendmail(self.me,args['t'],msg.as_string())
+		send_smtp.sendmail(self.address,args['t'],msg.as_string())
 		send_smtp.close()
 
 if __name__ == '__main__':
